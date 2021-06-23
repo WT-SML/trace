@@ -1,6 +1,6 @@
 <template>
   <div class="expand">
-    <span :class="`title ${customClass}`">
+    <span @click="$router.push('/g')" :class="`title ${customClass}`">
       <span>{{ title }}</span>
       <i class="fa fa-angle-down ms-1"></i>
     </span>
@@ -70,15 +70,15 @@ export default {
   }
   .main {
     position: absolute;
-    left: -91px;
-    width: 250px;
+    left: -109px;
+    width: 280px;
     padding: 15px;
     background-color: #fff;
     border-top: 2px solid #00c3ff;
     box-shadow: 0 3px 8px 2px rgb(1 1 1 / 20%);
     border-radius: 8px 6px;
     z-index: 9999;
-    display: none;
+    // display: none;
     .arrow-top {
       position: absolute;
       top: -12px;
