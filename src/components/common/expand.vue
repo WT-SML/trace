@@ -1,9 +1,9 @@
 <template>
   <div class="expand">
-    <span @click="$router.push('/g')" :class="`title ${customClass}`">
+    <router-link :to="titleLink" :class="`title ${customClass}`">
       <span>{{ title }}</span>
       <i class="fa fa-angle-down ms-1"></i>
-    </span>
+    </router-link>
     <div class="main">
       <i class="arrow-top"></i>
       <slot />
@@ -20,6 +20,10 @@ export default {
       default: "",
     },
     customClass: {
+      type: String,
+      default: "",
+    },
+    titleLink: {
       type: String,
       default: "",
     },
@@ -40,6 +44,8 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    text-decoration: none;
+    color: #fff;
     &:hover {
       background-color: $active-bgc;
       transition: all ease 0.3s;
@@ -70,15 +76,15 @@ export default {
   }
   .main {
     position: absolute;
-    left: -109px;
-    width: 280px;
+    left: -130px;
+    width: 320px;
     padding: 15px;
     background-color: #fff;
     border-top: 2px solid #00c3ff;
     box-shadow: 0 3px 8px 2px rgb(1 1 1 / 20%);
     border-radius: 8px 6px;
     z-index: 9999;
-    // display: none;
+    display: none;
     .arrow-top {
       position: absolute;
       top: -12px;

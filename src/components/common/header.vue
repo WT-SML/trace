@@ -12,37 +12,37 @@
     >
       <!-- left -->
       <div class="left d-flex align-items-center">
-        <img class="logo" :src="logo" alt="logo" />
+        <router-link to="/">
+          <img class="logo" :src="logo" alt="logo" />
+        </router-link>
         <span class="mx-2 text-muted">|</span>
         <div class="fw-bold me-5">苏墨璃 · 痕迹</div>
         <!-- 菜单 -->
         <div class="nav-list h-100 d-flex">
-          <div
-            @click="$router.push('/')"
+          <router-link
+            to="/"
             :class="`nav-item ${$route.path === '/' ? 'active' : ''}`"
           >
             首页
-          </div>
+          </router-link>
           <expand
             title="游戏"
             :customClass="`nav-item ${$route.path === '/g' ? 'active' : ''}`"
+            titleLink="/g"
           >
             <div>
               <div class="hot-games">热门游戏</div>
               <div class="row">
-                <div class="col-4">
-                  <span class="game-item">王者荣耀</span>
-                </div>
-                <div class="col-4">
-                  <span class="game-item">英雄联盟</span>
-                </div>
-                <div class="col-4">
-                  <span class="game-item">和平精英</span>
-                </div>
-                <div class="col-4">
-                  <span class="game-item">斗地主</span>
+                <div v-for="item in 12" :key="item" class="col-4">
+                  <router-link class="game-item" to="/g/wzry">
+                    王者荣耀
+                  </router-link>
                 </div>
               </div>
+              <router-link target="_blank" to="/g" class="more">
+                <span>更多</span>
+                <i class="fa fa-angle-right ms-1"></i>
+              </router-link>
             </div>
           </expand>
         </div>
@@ -112,6 +112,8 @@ export default {
           align-items: center;
           justify-content: center;
           cursor: pointer;
+          color: #fff;
+          text-decoration: none;
           &:hover {
             background-color: $active-bgc;
             transition: all ease 0.3s;
@@ -129,15 +131,15 @@ export default {
           margin-bottom: 10px;
         }
         .game-item {
-          display: block;
-          width: 78px;
-          height: 22px;
+          display: inline-block;
+          width: 80px;
+          height: 30px;
+          line-height: 30px;
           border: 1px solid #e3e7e8;
           text-align: center;
-          line-height: 22px;
-          border-radius: 11px;
-          text-decoration: none;
+          border-radius: 13px;
           color: #333;
+          text-decoration: none;
           font-size: 12px;
           white-space: nowrap;
           word-wrap: normal;
@@ -145,6 +147,21 @@ export default {
           text-overflow: ellipsis;
           margin-bottom: 8px;
           cursor: pointer;
+          &:hover {
+            color: #fff;
+            background-color: #00c3ff;
+          }
+        }
+        .more {
+          display: block;
+          text-decoration: none;
+          font-size: 12px;
+          height: 28px;
+          line-height: 28px;
+          border-radius: 14px;
+          color: #555;
+          background-color: #f1f2f4;
+          text-align: center;
           &:hover {
             color: #fff;
             background-color: #00c3ff;
