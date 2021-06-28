@@ -19,18 +19,25 @@
         <div class="fw-bold me-5">苏墨璃 · 痕迹</div>
         <!-- 菜单 -->
         <div class="nav-list h-100 d-flex">
+          <!-- 首页 -->
           <router-link
             to="/"
             :class="`nav-item ${$route.path === '/' ? 'active' : ''}`"
           >
             首页
           </router-link>
-          <expand
-            title="游戏"
-            :customClass="`nav-item ${$route.path === '/g' ? 'active' : ''}`"
-            titleLink="/g"
-          >
-            <div>
+          <!-- 游戏 -->
+          <expand>
+            <template #title>
+              <router-link
+                to="/g"
+                :class="`nav-item  ${$route.path === '/g' ? 'active' : ''}`"
+              >
+                <span>游戏</span>
+                <i class="fa fa-angle-down ms-1"></i>
+              </router-link>
+            </template>
+            <template #main>
               <div class="hot-games">热门游戏</div>
               <div class="row">
                 <div v-for="item in 12" :key="item" class="col-4">
@@ -43,12 +50,41 @@
                 <span>更多</span>
                 <i class="fa fa-angle-right ms-1"></i>
               </router-link>
-            </div>
+            </template>
           </expand>
         </div>
       </div>
       <!-- right -->
-      <div class="right">登录</div>
+      <div class="right">
+        <!-- search box -->
+        <div class="search">
+          <input type="text" class="input" placeholder="搜索" />
+          <i class="fa fa-search icon"></i>
+        </div>
+        <!-- user -->
+        <div v-if="user" class="user">
+          <expand>
+            <template #title>
+              <router-link :to="`/u/${user.id}`" class="nav-item">
+                <img
+                  class="rounded-circle border bg-white"
+                  width="36"
+                  height="36"
+                  :src="user.avatar"
+                  alt="avatar"
+                />
+              </router-link>
+            </template>
+            <template #main>
+              <div>个人中心</div>
+            </template>
+          </expand>
+        </div>
+        <!-- login -->
+        <div v-else class="login">
+          <span class="login-btn">登录</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -66,6 +102,12 @@ export default {
     // 状态
     const state = reactive({
       logo,
+      // user: null,
+      user: {
+        id: 10001,
+        name: "飞翔的丘丘人",
+        avatar: "https://img-static.mihoyo.com/avatar/avatar1.png",
+      },
       navList: [
         {
           name: "首页",
@@ -99,12 +141,12 @@ export default {
   .main {
     width: 1200px;
     background-color: #2d2f33;
+    $active-bgc: #ffffff2e;
     .left {
       .logo {
         height: 45px;
       }
       .nav-list {
-        $active-bgc: #ffffff2e;
         .nav-item {
           width: 68px;
           height: 62px;
@@ -114,9 +156,14 @@ export default {
           cursor: pointer;
           color: #fff;
           text-decoration: none;
+          .fa-angle-down {
+            transition: all ease 0.3s;
+          }
           &:hover {
             background-color: $active-bgc;
-            transition: all ease 0.3s;
+            .fa-angle-down {
+              transform: rotate(180deg);
+            }
           }
         }
         .active {
@@ -166,6 +213,56 @@ export default {
             color: #fff;
             background-color: #00c3ff;
           }
+        }
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      .search {
+        .input {
+          height: 30px;
+          border-radius: 15px;
+          border: none;
+          padding: 0 30px 0 15px;
+          background-color: #ffffff38;
+          color: #fff;
+          width: 130px;
+          transition: all ease 0.3s;
+          &:focus {
+            outline: none;
+            width: 190px;
+          }
+          &::-webkit-input-placeholder {
+            color: #fff;
+          }
+        }
+        .icon {
+          transform: translateX(-30px);
+          cursor: pointer;
+          padding: 9px;
+        }
+      }
+      .user {
+        .nav-item {
+          width: 68px;
+          height: 62px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          color: #fff;
+          text-decoration: none;
+          &:hover {
+            background-color: $active-bgc;
+          }
+        }
+      }
+      .login {
+        display: flex;
+        align-items: center;
+        .login-btn {
+          cursor: pointer;
         }
       }
     }

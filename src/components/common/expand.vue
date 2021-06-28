@@ -1,12 +1,11 @@
 <template>
   <div class="expand">
-    <router-link :to="titleLink" :class="`title ${customClass}`">
-      <span>{{ title }}</span>
-      <i class="fa fa-angle-down ms-1"></i>
-    </router-link>
+    <div class="title d-inline-block">
+      <slot name="title" />
+    </div>
     <div class="main">
       <i class="arrow-top"></i>
-      <slot />
+      <slot name="main" />
     </div>
   </div>
 </template>
@@ -14,20 +13,6 @@
 <script>
 export default {
   name: "expand",
-  props: {
-    title: {
-      type: String,
-      default: "",
-    },
-    customClass: {
-      type: String,
-      default: "",
-    },
-    titleLink: {
-      type: String,
-      default: "",
-    },
-  },
   setup() {
     return {};
   },
@@ -35,46 +20,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav-list {
-  $active-bgc: #ffffff2e;
-  .nav-item {
-    width: 68px;
-    height: 62px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-decoration: none;
-    color: #fff;
-    &:hover {
-      background-color: $active-bgc;
-      transition: all ease 0.3s;
-    }
-  }
-  .active {
-    background-color: $active-bgc;
-    transition: all ease 0.3s;
-    font-weight: bold;
-  }
-}
 .expand {
   position: relative;
   &:hover {
-    .title {
-      .fa-angle-down {
-        transform: rotate(180deg);
-      }
-    }
     .main {
       display: block;
-    }
-  }
-  .title {
-    .fa-angle-down {
+      transform: translateY(0px);
+      visibility: visible;
       transition: all ease 0.3s;
     }
   }
   .main {
+    transform: translateY(20px);
     position: absolute;
     left: -130px;
     width: 320px;
@@ -84,7 +41,7 @@ export default {
     box-shadow: 0 3px 8px 2px rgb(1 1 1 / 20%);
     border-radius: 8px 6px;
     z-index: 9999;
-    display: none;
+    visibility: hidden;
     .arrow-top {
       position: absolute;
       top: -12px;
