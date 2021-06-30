@@ -33,7 +33,7 @@ export default {
   .main {
     transform: translateY(20px);
     position: absolute;
-    left: -130px;
+    left: calc(-160px + 50%);
     width: 320px;
     padding: 15px;
     background-color: #fff;

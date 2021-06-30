@@ -39,8 +39,8 @@
             </template>
             <template #main>
               <div class="hot-games">热门游戏</div>
-              <div class="row">
-                <div v-for="item in 12" :key="item" class="col-4">
+              <div class="row px-2">
+                <div v-for="item in 12" :key="item" class="col-4 px-1">
                   <router-link class="game-item" to="/g/wzry">
                     王者荣耀
                   </router-link>
@@ -76,13 +76,14 @@
               </router-link>
             </template>
             <template #main>
-              <div>个人中心</div>
+              <div class="text-success">个人中心</div>
             </template>
           </expand>
         </div>
         <!-- login -->
         <div v-else class="login">
-          <span class="login-btn">登录</span>
+          <span class="login-btn" @click="handleLoginBtnClick()">登录</span>
+          <login :isShow="isLoginBoxShow" @close="isLoginBoxShow = false" />
         </div>
       </div>
     </div>
@@ -90,24 +91,28 @@
 </template>
 
 <script>
-import { reactive } from "@vue/reactivity";
+import { reactive, toRefs } from "vue";
 import logo from "../../assets/imgs/logo.png";
 import expand from "./expand.vue";
+import login from "./login.vue";
+
 export default {
   name: "myHeader",
   components: {
     expand,
+    login,
   },
   setup() {
     // 状态
     const state = reactive({
+      isLoginBoxShow: false,
       logo,
-      // user: null,
-      user: {
-        id: 10001,
-        name: "飞翔的丘丘人",
-        avatar: "https://img-static.mihoyo.com/avatar/avatar1.png",
-      },
+      user: null,
+      // user: {
+      //   id: 10001,
+      //   name: "飞翔的丘丘人",
+      //   avatar: "https://img-static.mihoyo.com/avatar/avatar1.png",
+      // },
       navList: [
         {
           name: "首页",
@@ -122,10 +127,14 @@ export default {
       ],
     });
     // 方法
-    const methods = {};
+    const methods = {
+      handleLoginBtnClick() {
+        state.isLoginBoxShow = true;
+      },
+    };
     // 返回
     return {
-      ...state,
+      ...toRefs(state),
       ...methods,
     };
   },
@@ -178,8 +187,10 @@ export default {
           margin-bottom: 10px;
         }
         .game-item {
+          padding: 0 10px;
           display: inline-block;
-          width: 80px;
+          // width: 80px;
+          width: 100%;
           height: 30px;
           line-height: 30px;
           border: 1px solid #e3e7e8;
