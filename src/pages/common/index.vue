@@ -113,7 +113,7 @@ export default {};
       margin-bottom: 8px;
       cursor: pointer;
       &:hover {
-        color: #00c3ff;
+        color: var(--bs-primary);
       }
     }
     .content {

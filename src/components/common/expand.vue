@@ -37,7 +37,7 @@ export default {
     width: 320px;
     padding: 15px;
     background-color: #fff;
-    border-top: 2px solid #00c3ff;
+    border-top: 2px solid var(--bs-primary);
     box-shadow: 0 3px 8px 2px rgb(1 1 1 / 20%);
     border-radius: 8px 6px;
     z-index: 9999;
@@ -49,7 +49,7 @@ export default {
       width: 0;
       height: 0;
       display: inline-block;
-      border: 6px solid #00c3ff;
+      border: 6px solid var(--bs-primary);
       border-left-color: rgba(0, 0, 0, 0);
       border-right-color: rgba(0, 0, 0, 0);
       border-top-color: rgba(0, 0, 0, 0);

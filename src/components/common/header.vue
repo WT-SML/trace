@@ -207,7 +207,7 @@ export default {
           cursor: pointer;
           &:hover {
             color: #fff;
-            background-color: #00c3ff;
+            background-color: var(--bs-primary);
           }
         }
         .more {
@@ -222,7 +222,7 @@ export default {
           text-align: center;
           &:hover {
             color: #fff;
-            background-color: #00c3ff;
+            background-color: var(--bs-primary);
           }
         }
       }

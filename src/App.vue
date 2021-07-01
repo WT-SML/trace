@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="my-header">
-      <my-header />
+      <myHeader />
     </div>
     <div class="my-main">
       <keep-alive>
@@ -10,7 +10,7 @@
       <router-view v-if="!$route.meta.keepAlive" />
     </div>
     <div class="my-footer">
-      <my-footer />
+      <myFooter />
     </div>
   </div>
 </template>
