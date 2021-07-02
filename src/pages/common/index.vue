@@ -72,8 +72,20 @@
 </template>
 
 <script>
+import { reactive, toRefs } from "vue";
+
 // 首页 or 某游戏的首页
-export default {};
+export default {
+  name: "index",
+  setup(props, ctx) {
+    const state = reactive({});
+    const methods = {};
+    return {
+      ...toRefs(state),
+      ...methods,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

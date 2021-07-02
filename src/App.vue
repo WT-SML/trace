@@ -13,14 +13,23 @@
       <myFooter />
     </div>
   </div>
+  <!-- 全局安全验证组件：滑动验证 -->
+  <slideToUnlock />
+  <!-- 全局提示组件 -->
+  <msg />
+  <!-- 回到顶部 -->
+  <backtop />
 </template>
 
 <script>
 import myHeader from "../src/components/common/header.vue";
 import myFooter from "../src/components/common/footer.vue";
+import slideToUnlock from "../src/components/safety/slide-to-unlock.vue";
+import backtop from "../src/components/common/backtop.vue";
+import msg from "../src/components/feedback/msg.vue";
 export default {
   name: "App",
-  components: { myHeader, myFooter },
+  components: { myHeader, myFooter, slideToUnlock, msg, backtop },
   setup() {},
 };
 </script>
@@ -34,7 +43,7 @@ export default {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 99999;
+    z-index: 999;
   }
   .my-footer {
     flex-shrink: 0;

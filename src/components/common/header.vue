@@ -83,7 +83,10 @@
         <!-- login -->
         <div v-else class="login">
           <span class="login-btn" @click="handleLoginBtnClick()">登录</span>
-          <login :isShow="isLoginBoxShow" @close="isLoginBoxShow = false" />
+          <login
+            :isShow="isLoginComponentShow"
+            @close-login-component="isLoginComponentShow = false"
+          />
         </div>
       </div>
     </div>
@@ -105,7 +108,7 @@ export default {
   setup() {
     // 状态
     const state = reactive({
-      isLoginBoxShow: false,
+      isLoginComponentShow: false,
       logo,
       user: null,
       // user: {
@@ -129,7 +132,7 @@ export default {
     // 方法
     const methods = {
       handleLoginBtnClick() {
-        state.isLoginBoxShow = true;
+        state.isLoginComponentShow = true;
       },
     };
     // 返回
@@ -235,7 +238,7 @@ export default {
           height: 30px;
           border-radius: 15px;
           border: none;
-          padding: 0 30px 0 15px;
+          padding: 0 36px 0 15px;
           background-color: #ffffff38;
           color: #fff;
           width: 130px;
@@ -249,9 +252,9 @@ export default {
           }
         }
         .icon {
-          transform: translateX(-30px);
+          transform: translateX(-37px) translateY(-1px);
           cursor: pointer;
-          padding: 9px;
+          padding: 9px 12px;
         }
       }
       .user {

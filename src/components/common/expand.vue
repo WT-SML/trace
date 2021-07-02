@@ -40,7 +40,6 @@ export default {
     border-top: 2px solid var(--bs-primary);
     box-shadow: 0 3px 8px 2px rgb(1 1 1 / 20%);
     border-radius: 8px 6px;
-    z-index: 9999;
     visibility: hidden;
     .arrow-top {
       position: absolute;
