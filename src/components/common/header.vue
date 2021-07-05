@@ -21,13 +21,15 @@
         <div class="nav-list h-100 d-flex">
           <!-- 首页 -->
           <router-link
-            to="/"
-            :class="`nav-item ${$route.path === '/' ? 'active' : ''}`"
+            v-for="item in navList"
+            :to="item.path"
+            :key="item.path"
+            :class="`nav-item ${$route.path === item.path ? 'active' : ''}`"
           >
-            首页
+            {{ item.name }}
           </router-link>
           <!-- 游戏 -->
-          <expand>
+          <!-- <expand>
             <template #title>
               <router-link
                 to="/g"
@@ -51,7 +53,7 @@
                 <i class="fa fa-angle-right ms-1"></i>
               </router-link>
             </template>
-          </expand>
+          </expand> -->
         </div>
       </div>
       <!-- right -->
@@ -94,7 +96,7 @@
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
+import { onMounted, reactive, toRefs } from "vue";
 import logo from "../../assets/imgs/logo.png";
 import expand from "./expand.vue";
 import login from "./login.vue";
@@ -119,13 +121,8 @@ export default {
       navList: [
         {
           name: "首页",
-          path: "/",
+          path: "/index",
           isExpand: false,
-        },
-        {
-          name: "游戏",
-          path: "/g",
-          isExpand: true,
         },
       ],
     });
@@ -135,6 +132,17 @@ export default {
         state.isLoginComponentShow = true;
       },
     };
+    onMounted(() => {
+      if (localStorage.getItem("currentGame")) {
+        const currentGame = JSON.parse(localStorage.getItem("currentGame"));
+        state.navList.push({
+          name: currentGame.name,
+          path: `/g/${currentGame.gid}`,
+          isExpand: false,
+        });
+        console.log(state);
+      }
+    });
     // 返回
     return {
       ...toRefs(state),
@@ -160,7 +168,8 @@ export default {
       }
       .nav-list {
         .nav-item {
-          width: 68px;
+          min-width: 68px;
+          padding: 0 20px;
           height: 62px;
           display: flex;
           align-items: center;
@@ -192,7 +201,6 @@ export default {
         .game-item {
           padding: 0 10px;
           display: inline-block;
-          // width: 80px;
           width: 100%;
           height: 30px;
           line-height: 30px;

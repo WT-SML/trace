@@ -3,7 +3,7 @@
     <template #content>
       <div class="slide-to-unlock-box rounded">
         <div class="title d-flex justify-content-between border-bottom">
-          <span>请完成安全验证</span>
+          <span>{{ statusMap[status].tip }}</span>
           <span>
             <i class="fa fa-close cp" @click="close()"></i>
           </span>
@@ -25,7 +25,7 @@
                 <i :class="`fa fa-${statusMap[status].icon}`"></i>
               </span>
             </div>
-            <span class="tip">{{ statusMap[status].tip }}</span>
+            <!-- <span class="tip">{{ statusMap[status].tip }}</span> -->
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default {
     color: #fff;
     background-color: #d0d0d0;
     .tip {
-      user-select: none;
+      // user-select: none;
     }
     .slider-box {
       background-color: #d0d0d0;

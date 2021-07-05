@@ -1,4 +1,7 @@
 import emitter from "./emitter.js";
+/**
+ * 工具类（方法）
+ */
 
 /**
  * 动态添加脚本
