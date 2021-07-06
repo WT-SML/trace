@@ -4,6 +4,7 @@
 
 import axios from "axios";
 import { API_BASE_URL } from "./constant.js";
+import { msg } from "./index.js";
 
 /**
  * axios二次封装
@@ -43,27 +44,53 @@ export const myAxios = (obj, success, error, final) => {
           location.reload();
         }
         if (err.response.status === 422) {
-          alert(JSON.stringify(err.response.data));
+          msg({
+            msg: JSON.stringify(err.response.data),
+            type: "error",
+          });
         }
         if (
           err.response.status === 403 ||
           err.response.status === 405 ||
           err.response.status === 409
         ) {
-          alert(err.response.data.msg || "未知错误");
+          msg({
+            msg: err.response.data.msg || "未知错误",
+            type: "error",
+          });
         }
         if (err.response.status === 404) {
-          alert("抱歉！未找到相关数据。");
+          msg({
+            msg: "抱歉！未找到相关数据",
+            type: "error",
+          });
         }
         if (err.response.status === 500) {
-          alert(err.response.data.msg || "服务器错误");
+          msg({
+            msg: err.response.data.msg || "服务器错误",
+            type: "error",
+          });
         }
         if (err.response.status === 503) {
-          alert("服务器可能正在维护，请稍后再试！");
+          msg({
+            msg: "服务器可能正在维护，请稍后再试",
+            type: "error",
+          });
         }
       } else {
+        // 处理超时
         if (err.message.includes("timeout")) {
-          alert("请求网络超时，请检查网络后重试");
+          msg({
+            msg: "请求网络超时，请检查网络后重试",
+            type: "error",
+          });
+        }
+        // 处理其他的请求失败
+        else if (err.message.includes("Network Error")) {
+          msg({
+            msg: err,
+            type: "error",
+          });
         }
         console.warn("errMsg:", err.message);
       }

@@ -4,15 +4,15 @@
       <div
         v-for="item in typeMap"
         :key="item.type"
-        @click="filter.type = item.type"
+        @click="setFilterType(item.type)"
         :class="`cate-item ${filter.type === item.type ? 'active' : ''}`"
       >
         {{ item.name }}
       </div>
     </div>
     <div class="games row">
-      <div v-for="item in filteredGameList" :key="item.id" class="col-3">
-        <div class="game-item" @click="handleGameItemClick(item)">
+      <div v-for="item in filteredGameList" :key="item.id" class="col-2">
+        <div class="game-item wow fadeInUp" @click="handleGameItemClick(item)">
           <img class="logo" v-lazy="item.logo" :alt="item.name" />
           <div class="name">
             {{ item.name }}
@@ -30,6 +30,7 @@ import { computed, onMounted, reactive, toRefs } from "vue";
 import { getGameList } from "../../apis/index.js";
 import loading from "../../components/common/loading.vue";
 import noData from "../../components/common/no-data.vue";
+import { loadScript } from "../../utils/index.js";
 
 // 首页
 export default {
@@ -37,6 +38,7 @@ export default {
   components: { loading, noData },
   setup(props, ctx) {
     const state = reactive({
+      filteredGameList: [],
       gameList: [],
       isLoading: false,
       // 筛选
@@ -53,35 +55,49 @@ export default {
     const methods = {
       async init() {
         state.isLoading = true;
-        const res = await getGameList();
-        state.gameList = res;
-        state.isLoading = false;
+        try {
+          const res = await getGameList();
+          state.gameList = res;
+          state.filteredGameList = res;
+          state.isLoading = false;
+        } catch {
+          state.isLoading = false;
+        }
+      },
+      setFilterType(type) {
+        state.filter.type = type;
+        state.filteredGameList = [];
+        state.isLoading = true;
+        setTimeout(() => {
+          if (type === -1) {
+            state.filteredGameList = state.gameList;
+          } else {
+            state.filteredGameList = state.gameList.filter(
+              (item) => item.type === type
+            );
+          }
+          state.isLoading = false;
+        }, 300);
       },
       handleGameItemClick(item) {
         localStorage.setItem("currentGame", JSON.stringify(item));
         window.location.href = `/g/${item.gid}`;
       },
     };
-    onMounted(() => {
-      methods.init();
+    onMounted(async () => {
+      await loadScript(
+        "https://cdn.bootcdn.net/ajax/libs/wow/1.1.2/wow.min.js"
+      );
+      await loadScript(
+        "https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.compat.min.css",
+        "link"
+      );
+      new window.WOW().init();
+      await methods.init();
     });
-    const computedState = {
-      filteredGameList: computed({
-        get: () => {
-          if (state.filter.type === -1) {
-            return state.gameList;
-          }
-          return state.gameList.filter(
-            (item) => item.type === state.filter.type
-          );
-        },
-        set: (val) => {},
-      }),
-    };
     return {
       ...toRefs(state),
       ...methods,
-      ...computedState,
     };
   },
 };
@@ -131,8 +147,8 @@ export default {
       box-shadow: 0 3px 8px rgb(34 34 34 / 12%);
     }
     .logo {
-      width: 140px;
-      height: 140px;
+      width: 90px;
+      height: 90px;
       border-radius: 2px;
       display: block;
       margin: 0 auto;

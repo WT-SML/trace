@@ -1,6 +1,6 @@
 <template>
   <div class="common-page row">
-    <div class="col-10">
+    <div class="col-9">
       <!-- 文章列表 -->
       <div class="a-list">
         <div class="a-item" v-for="item in 10" :key="item.id">
@@ -66,8 +66,52 @@
         </div>
       </div>
     </div>
-    <div class="col-2">2</div>
-    123
+    <div class="col-3">
+      <div class="publish">
+        <div class="title">发布</div>
+        <div class="content">
+          <button class="btn btn-primary text-white">
+            <i class="fa fa-pencil"></i>
+            发布
+            <i class="fa fa-angle-right"></i>
+          </button>
+          <div class="desc">攻略、剧情、二创、分析</div>
+        </div>
+      </div>
+      <div class="hot">
+        <div class="title">
+          <span class="left">热搜</span>
+          <span class="right">更多</span>
+        </div>
+        <div class="content">
+          <div class="hot-item" v-for="(item, i) in 10" :key="item.id">
+            {{ i + 1 }}.继往开来的世纪伟业
+          </div>
+        </div>
+      </div>
+      <div class="hot">
+        <div class="title">
+          <span class="left">话题</span>
+          <span class="right">更多</span>
+        </div>
+        <div class="content">
+          <div class="hot-item" v-for="(item) in 10" :key="item.id">
+            #继往开来的世纪伟业#
+          </div>
+        </div>
+      </div>
+      <div class="hot">
+        <div class="title">
+          <span class="left">热榜</span>
+          <span class="right">更多</span>
+        </div>
+        <div class="content">
+          <div class="hot-item" v-for="(item, i) in 10" :key="item.id">
+            {{ i + 1 }}.继往开来的世纪伟业
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -171,6 +215,62 @@ export default {
           margin-right: 15px;
         }
       }
+    }
+  }
+}
+.publish {
+  background-color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  margin-bottom: 24px;
+  .title {
+    font-size: 15px;
+    border-bottom: 1px dashed #ebebeb;
+    font-weight: bold;
+    padding: 10px 0;
+  }
+  .content {
+    padding: 20px 0;
+    .btn {
+      width: 135px;
+      display: block;
+      margin: 0 auto;
+      font-weight: bold;
+    }
+    .desc {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #999999;
+    }
+  }
+}
+.hot {
+  background-color: #fff;
+  border-radius: 2px;
+  margin-bottom: 24px;
+  .title {
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ebebeb;
+    .left {
+      font-weight: bold;
+    }
+    .right {
+      cursor: pointer;
+      color: #999999;
+      font-size: 12px;
+    }
+  }
+  .content {
+    padding: 10px 20px;
+    .hot-item {
+      font-size: 12px;
+      color: #333333;
+      padding: 5px 0;
+      cursor: pointer;
     }
   }
 }

@@ -140,7 +140,6 @@ export default {
           path: `/g/${currentGame.gid}`,
           isExpand: false,
         });
-        console.log(state);
       }
     });
     // 返回
