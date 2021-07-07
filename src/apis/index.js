@@ -6,3 +6,9 @@ export const getGameList = (params) =>
     url: "/games",
     params,
   });
+// 获取内容
+export const getContent = (contentId, params) =>
+  request({
+    url: `/content/${contentId}`,
+    params,
+  });

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive, toRefs } from "vue";
+import { onMounted, reactive, toRefs } from "vue";
 import { getGameList } from "../../apis/index.js";
 import loading from "../../components/common/loading.vue";
 import noData from "../../components/common/no-data.vue";
@@ -40,7 +40,7 @@ export default {
     const state = reactive({
       filteredGameList: [],
       gameList: [],
-      isLoading: false,
+      isLoading: true,
       // 筛选
       filter: {
         type: -1, // -1 => 全部;0 => 网游; 1 => 主机; 2 => 手游;
@@ -77,7 +77,7 @@ export default {
             );
           }
           state.isLoading = false;
-        }, 300);
+        }, 100);
       },
       handleGameItemClick(item) {
         localStorage.setItem("currentGame", JSON.stringify(item));

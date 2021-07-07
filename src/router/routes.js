@@ -17,20 +17,22 @@ const routes = [
     path: "/index",
     name: "index",
     component: () => import("../pages/common/index.vue"),
-    meta: {},
-  },
-  // games
-  {
-    path: "/g",
-    name: "games",
-    component: () => import("../pages/common/games.vue"),
-    meta: { title: "游戏", keepAlive: true },
+    meta: {
+      keepAlive: true,
+    },
   },
   // game detail
   {
     path: "/g/:gid",
     name: "gameDetail",
     component: () => import("../pages/common/game-index.vue"),
+  },
+  // content detail
+  {
+    path: "/c/:cid",
+    props: true,
+    name: "contentDetail",
+    component: () => import("../pages/common/content.vue"),
   },
   // user detail
   { path: "/u/:uid" },

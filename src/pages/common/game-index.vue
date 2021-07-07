@@ -3,7 +3,12 @@
     <div class="col-9">
       <!-- 文章列表 -->
       <div class="a-list">
-        <div class="a-item" v-for="item in 10" :key="item.id">
+        <div
+          class="a-item"
+          v-for="item in 10"
+          :key="item.id"
+          @click="$router.push(`/c/${item}`)"
+        >
           <div class="author">
             <span class="cp">
               <img
@@ -78,36 +83,39 @@
           <div class="desc">攻略、剧情、二创、分析</div>
         </div>
       </div>
-      <div class="hot">
+      <div class="top">
         <div class="title">
           <span class="left">热搜</span>
           <span class="right">更多</span>
         </div>
         <div class="content">
-          <div class="hot-item" v-for="(item, i) in 10" :key="item.id">
-            {{ i + 1 }}.继往开来的世纪伟业
+          <div class="item" v-for="(item, i) in 10" :key="item.id">
+            <span :class="`no no-${i + 1}`">{{ i + 1 }}</span>
+            <span class="item-title">继往开来的世纪伟业继往开来的世纪伟业</span>
           </div>
         </div>
       </div>
-      <div class="hot">
+      <div class="top">
         <div class="title">
           <span class="left">话题</span>
           <span class="right">更多</span>
         </div>
         <div class="content">
-          <div class="hot-item" v-for="(item) in 10" :key="item.id">
-            #继往开来的世纪伟业#
+          <div class="item" v-for="item in 10" :key="item.id">
+            <span class="item-title"
+              >#继往开来的世纪伟业继往开来的世纪伟业#</span
+            >
           </div>
         </div>
       </div>
-      <div class="hot">
+      <div class="top">
         <div class="title">
-          <span class="left">热榜</span>
+          <span class="left">内容</span>
           <span class="right">更多</span>
         </div>
         <div class="content">
-          <div class="hot-item" v-for="(item, i) in 10" :key="item.id">
-            {{ i + 1 }}.继往开来的世纪伟业
+          <div class="item" v-for="item in 10" :key="item.id">
+            <span class="item-title">永不言弃的丘丘人永不言弃的丘丘人</span>
           </div>
         </div>
       </div>
@@ -221,7 +229,7 @@ export default {
 .publish {
   background-color: #fff;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 4px;
   margin-bottom: 24px;
   .title {
     font-size: 15px;
@@ -244,10 +252,14 @@ export default {
     }
   }
 }
-.hot {
+.top {
   background-color: #fff;
   border-radius: 2px;
   margin-bottom: 24px;
+  &:last-child {
+    position: sticky;
+    top: 90px;
+  }
   .title {
     font-size: 15px;
     display: flex;
@@ -266,11 +278,31 @@ export default {
   }
   .content {
     padding: 10px 20px;
-    .hot-item {
+    .item {
       font-size: 12px;
       color: #333333;
       padding: 5px 0;
       cursor: pointer;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      .item-title {
+        &:hover {
+          color: var(--bs-primary);
+        }
+      }
+    }
+    .no {
+      margin-right: 10px;
+    }
+    .no-1 {
+      color: #fe2d46;
+    }
+    .no-2 {
+      color: #ff6600;
+    }
+    .no-3 {
+      color: #faa90e;
     }
   }
 }

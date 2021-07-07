@@ -4,10 +4,12 @@
       <myHeader />
     </div>
     <div class="my-main">
-      <keep-alive>
-        <router-view v-if="$route.meta.keepAlive" />
-      </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive" />
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" v-if="$route.meta.keepAlive" />
+        </keep-alive>
+        <component :is="Component" v-if="!$route.meta.keepAlive" />
+      </router-view>
     </div>
     <div class="my-footer">
       <myFooter />
