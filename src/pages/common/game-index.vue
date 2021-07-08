@@ -48,10 +48,10 @@
           </div>
           <div class="data">
             <div class="tags">
-              <span class="tag">同人</span>
-              <span class="tag">cos</span>
-              <span class="tag">分析</span>
-              <span class="tag">攻略</span>
+              <span class="tag">#同人#</span>
+              <span class="tag">#cos#</span>
+              <span class="tag">#分析#</span>
+              <span class="tag">#攻略#</span>
             </div>
             <div class="data-nums">
               <span class="data-nums-item">
